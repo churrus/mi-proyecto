@@ -42,18 +42,31 @@ class UsersModuleTest extends TestCase
 
     /** @test */
 
-    function it_loads_the_users_details_page()
+    function it_displays_the_users_details()
     {
-        $this->get('/usuarios/5')
+        $user = factory(User::class)->create([
+            'name' => 'Duilio Palacios',
+        ]);
+
+        $this->get('/usuario/' .$user->id)
             ->assertStatus(200)
-            ->assertSee('Mostrando detalle del usuario: 5');
+            ->assertSee('Duilio Palacios');
+    }
+
+    /** @test */
+
+    function it_displays_a_404_error_if_the_user_is_not_found()
+    {
+        $this->get('/usuario/999')
+            ->assertStatus(404)
+            ->assertSee('Página no encontrada');
     }
 
     /** @test */
 
     function it_loads_the_new_users_page()
     {
-        $this->get('/usuarios/nuevo')
+        $this->get('/usuario/nuevo')
             ->assertStatus(200)
             ->assertSee('Crear nuevo usuario');
     }
@@ -62,7 +75,7 @@ class UsersModuleTest extends TestCase
 
     function it_loads_the_edit_users_page()
     {
-        $this->get('/usuarios/7/edit')
+        $this->get('/usuario/7/edit')
             ->assertStatus(200)
             ->assertSee('Editando al usuario: 7');
     }

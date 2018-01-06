@@ -1,25 +1,29 @@
 @extends('layout')
 
-@section('title', "Detalle de usuario {$id}")
+@section('title', "Detalle de usuario {$user->id}")
 
 @section('content')
 
-    <h1>Mostrando detalle del usuario: {{ $id }}</h1>
+    <h1>Mostrando detalle del usuario: {{ $user->id }}</h1>
 
     <table class="table table-hover">
         <tbody>
         <tr>
             <th>Nombre</th>
-            <td>Sergio</td>
+            <td>{{$user->name}}</td>
         </tr>
         <tr>
-            <th>Apellido</th>
-            <td>Torquemada</td>
+            <th>Email</th>
+            <td>{{$user->email}}</td>
         </tr>
         <tr>
-            <th>Dirección</th>
-            <td>Itxaropen auzoa 13 </td>
+            <th>Admin</th>
+            <td>{{$user->is_admin}}</td>
         </tr>
         </tbody>
     </table>
+
+    <p>
+        <a class="btn btn-outline-primary" href="{{ route('users.index') }}">Regresar</a>
+    </p>
 @endsection
