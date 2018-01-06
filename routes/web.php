@@ -11,6 +11,7 @@
 |
 */
 
+
 Route::get('/', function () {
     return "Home";
 });
@@ -24,6 +25,8 @@ Route::get('/usuario/{user}', 'UserController@show')
 
 Route::get('/usuario/nuevo', 'UserController@create')
     ->name('users.new');
+
+Route::post('/usuarios', 'UserController@store');
 
 Route::get('/usuario/{id}/edit', 'UserController@edit')
     ->where('id', '[0-9]+')
