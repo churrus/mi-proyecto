@@ -40,10 +40,15 @@ class UserController extends Controller
     {
         $data = request()->validate([
             'name' => 'required',
-            'email' => 'required',
-            'password' => 'required',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|min:7',
         ],[
             'name.required' => 'El campo nombre es obligatorio',
+            'email.required' => 'El campo email es obligatorio',
+            'email.email' => 'No es un email válido',
+            'email.unique' => 'El email ya existe en la Base de datos.',
+            'password.required' => 'El campo password es obligatorio',
+            'password.min' => 'El password tiene que tener más de 6 caracteres.',
         ]);
 
         User::create([
