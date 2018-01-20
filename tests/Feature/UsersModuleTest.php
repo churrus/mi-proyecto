@@ -191,6 +191,7 @@ class UsersModuleTest extends TestCase
         $this->assertEquals(0, User::count());
     }
 
+<<<<<<< HEAD
     /** @test */
 
     function it_loads_the_edit_users_page()
@@ -206,5 +207,7 @@ class UsersModuleTest extends TestCase
             });
     }
 
+=======
+>>>>>>> master
 
 }
