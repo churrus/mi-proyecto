@@ -31,9 +31,11 @@ class UserController extends Controller
         return view('users.create');
     }
 
-    public function edit($id)
+    public function edit(User $user)
     {
-        return "Editando al usuario: {$id}";
+        $title = 'Editar usuario';
+
+        return view('users.edit', compact('user', 'title'));
     }
 
     public function store()

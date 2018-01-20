@@ -72,15 +72,6 @@ class UsersModuleTest extends TestCase
 
     /** @test */
 
-    function it_loads_the_edit_users_page()
-    {
-        $this->get('/usuario/7/edit')
-            ->assertStatus(200)
-            ->assertSee('Editando al usuario: 7');
-    }
-
-    /** @test */
-
     function it_creates_a_new_user()
     {
         $this->post('/usuarios/', [
@@ -198,6 +189,21 @@ class UsersModuleTest extends TestCase
             ->assertSessionHasErrors(['password' => 'El password tiene que tener más de 6 caracteres.']);
 
         $this->assertEquals(0, User::count());
+    }
+
+    /** @test */
+
+    function it_loads_the_edit_users_page()
+    {
+        $user = factory(User::class)->create();
+
+        $this->get("/usuario/{$user->id}/editar")
+            ->assertStatus(200)
+            ->assertViewIs('users.edit')
+            ->assertSee('Editar usuario')
+            ->assertViewHas('user', function ($viewUser) use ($user) {
+                return $viewUser->id === $user->id;
+            });
     }
 
 
